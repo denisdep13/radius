@@ -1,0 +1,225 @@
+/* Privacy controls: no third-party content is shown before an explicit choice. */
+.privacy-banner[hidden],
+.map-consent-placeholder[hidden] {
+  display: none !important;
+}
+
+.privacy-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10000;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #f5f3ed;
+  background: rgba(20, 20, 18, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+  font-family: 'M PLUS 1p', Arial, sans-serif;
+}
+
+.privacy-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.privacy-banner-copy {
+  max-width: 650px;
+}
+
+.privacy-banner-title {
+  margin: 0 0 7px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.privacy-banner-text {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.privacy-banner-text a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.privacy-banner-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+}
+
+.privacy-btn {
+  min-height: 42px;
+  padding: 10px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.privacy-btn-primary {
+  color: #111;
+  background: #fff;
+  border-color: #fff;
+}
+
+.privacy-btn-secondary {
+  color: #fff;
+  background: transparent;
+}
+
+.privacy-btn:focus-visible,
+.privacy-settings:focus-visible,
+.map-consent-action:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.map-consent-shell {
+  position: relative;
+  min-height: 360px;
+  background: #171715;
+}
+
+.map-consent-shell iframe[data-consent-src] {
+  display: none !important;
+}
+
+.map-consent-shell iframe[data-consent-src].is-loaded {
+  display: block !important;
+}
+
+.map-consent-placeholder {
+  min-height: 360px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(145deg, #20201e, #121211);
+}
+
+.map-consent-title {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.map-consent-text {
+  max-width: 590px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.map-consent-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.map-consent-action {
+  min-height: 42px;
+  padding: 10px 18px;
+  color: #111;
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.map-consent-link {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.age-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 26px;
+  padding: 0 7px;
+  color: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.privacy-settings {
+  padding: 0;
+  color: rgba(255, 255, 255, 0.58);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .privacy-banner {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    padding: 16px;
+  }
+
+  .privacy-banner-inner {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .privacy-banner-actions {
+    width: 100%;
+  }
+
+  .privacy-btn {
+    flex: 1 1 0;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .map-consent-placeholder {
+    padding: 24px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .privacy-banner,
+  .privacy-btn,
+  .map-consent-action {
+    scroll-behavior: auto;
+    transition: none !important;
+  }
+}
