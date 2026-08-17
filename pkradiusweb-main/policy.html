@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Политика конфиденциальности и обработки персональных данных — Радиус</title>
+<meta name="description" content="Политика конфиденциальности ООО «ПАКОН»: персональные данные, технические журналы, cookie, локальное хранилище и карта Яндекса на сайте ПК Радиус.">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="privacy.css">
+<script src="privacy.js" defer></script>
+<style>
+
+/* ── TOKENS ─────────────────────────────────────── */
+:root {
+  --bg:    #0c0c0c;
+  --bg2:   #141414;
+  --bg3:   #1c1c1c;
+  --line:  rgba(255,255,255,0.09);
+  --line2: rgba(255,255,255,0.18);
+  --white: #ffffff;
+  --muted: rgba(255,255,255,0.72);
+  --accent: #c8c4bb;
+  --font-d: 'M PLUS 1p', sans-serif;
+  --font-b: 'M PLUS 1p', sans-serif;
+  --max:   1200px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-b);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ── UTILS ──────────────────────────────────────── */
+.wrap    { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem,5vw,3rem); }
+.section { padding: clamp(4rem,8vw,7rem) 0; }
+.hr      { height: 1px; background: var(--line); }
+.tag {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 1.25rem;
+}
+
+/* ── BUTTONS ─────────────────────────────────────── */
+.btn {
+  font-family: var(--font-b); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 12px 26px; cursor: pointer; border: none;
+  transition: all 0.2s; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-w { background: var(--white); color: #000; }
+.btn-w:hover { opacity: 0.85; }
+.btn-o { background: transparent; color: var(--white); border: 0.5px solid var(--line2); }
+.btn-o:hover { border-color: var(--white); }
+
+/* ── LOGO ────────────────────────────────────────── */
+.logo { display: flex; flex-direction: column; line-height: 1; cursor: default; }
+.logo-word {
+  font-family: var(--font-b); font-weight: 600; font-size: 20px;
+  letter-spacing: 0.28em; color: var(--white); text-transform: uppercase;
+}
+.logo-rule { height: 0.5px; background: var(--line2); margin: 5px 0 4px; }
+.logo-sub {
+  font-size: 8.5px; font-weight: 500; letter-spacing: 0.22em;
+  color: var(--muted); text-transform: uppercase;
+}
+
+/* ── HEADER ──────────────────────────────────────── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(12,12,12,0.93);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow 0.3s;
+}
+header.sc { box-shadow: 0 4px 30px rgba(0,0,0,0.4); }
+.hdr { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+nav { display: flex; gap: 1.75rem; align-items: center; white-space: nowrap; }
+nav a {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); transition: color 0.2s;
+}
+nav a:hover, nav a.act { color: var(--white); }
+.hdr-r { display: flex; align-items: center; gap: 1.5rem; }
+.phone { font-size: 14px; font-weight: 600; color: var(--white); white-space: nowrap; }
+
+/* ── HERO ────────────────────────────────────────── */
+.hero {
+  min-height: 100svh; padding-top: 66px;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: var(--bg2);
+}
+/* Декоративные дуги */
+.hero-bg::after {
+  content: ''; position: absolute; bottom: -45%; left: 50%;
+  transform: translateX(-50%); width: 140vw; height: 140vw;
+  border-radius: 50%; border: 0.5px solid rgba(255,255,255,0.045);
+}
+.hero-bg::before {
+  content: ''; position: absolute; bottom: -65%; left: 50%;
+  transform: translateX(-50%); width: 200vw; height: 200vw;
+  border-radius: 50%; border: 0.5px solid rgba(255,255,255,0.025);
+}
+.hero-ph {
+  position: absolute; inset: 66px 0 0;
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-ph::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 25%, var(--bg) 100%);
+}
+.hero-ph-icon { opacity: 0.1; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.hero-ph-icon svg { width: 52px; height: 52px; }
+.hero-ph-icon span { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; }
+.hero-body { position: relative; z-index: 2; padding: clamp(4rem,7vw,6rem) 0 clamp(3rem,5vw,4.5rem); }
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1.75rem;
+}
+.hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--muted); }
+h1.hero-title {
+  font-family: var(--font-d); font-weight: 300; font-style: italic;
+  font-size: clamp(3.2rem,7.5vw,7rem);
+  line-height: 1.04; letter-spacing: -0.01em; color: var(--white);
+  max-width: 860px; margin-bottom: 1.75rem;
+}
+h1.hero-title em { font-style: normal; font-weight: 500; }
+.hero-sub {
+  font-size: 16px; font-weight: 500; color: var(--muted);
+  max-width: 460px; line-height: 1.75; margin-bottom: 2.75rem;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; right: clamp(1.25rem,5vw,3rem);
+  z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted);
+}
+.scroll-ln {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--muted), transparent);
+  animation: scDn 2s ease-in-out infinite;
+}
+@keyframes scDn {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ── MARQUEE 1 — типы профилей ───────────────────── */
+.marq1 { background: var(--bg3); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; }
+.marq1-inner { display: flex; align-items: center; height: 44px; }
+.marq-track {
+  display: inline-flex; align-items: center;
+  animation: marq 22s linear infinite; white-space: nowrap; flex-shrink: 0;
+}
+.marq-track.rev { animation-direction: reverse; animation-duration: 28s; }
+.mi {
+  display: inline-flex; align-items: center; gap: 0;
+  padding: 0; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.md { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.3); flex-shrink: 0; margin: 0 28px; }
+@keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── STATS ───────────────────────────────────────── */
+.stats { background: var(--bg2); border-bottom: 1px solid var(--line); }
+.stats-grid { display: grid; grid-template-columns: repeat(3,1fr); }
+.stat { padding: clamp(1.5rem,4vw,2.5rem) clamp(1.5rem,3vw,2.5rem); border-right: 1px solid var(--line); }
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--font-d); font-weight: 300;
+  font-size: clamp(2.8rem,5vw,4.5rem); line-height: 1; color: var(--white);
+}
+.stat-lbl { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+/* ── SERVICES ────────────────────────────────────── */
+.svc-hd { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: clamp(2.5rem,5vw,4rem); }
+.sec-t {
+  font-family: var(--font-d); font-weight: 300;
+  font-size: clamp(2.2rem,4vw,3.5rem); line-height: 1.1; color: var(--white);
+}
+.svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); }
+.svc-card {
+  background: var(--bg); padding: clamp(2rem,4vw,3rem);
+  display: flex; flex-direction: column; gap: 1.25rem;
+  transition: background 0.3s; position: relative; overflow: hidden;
+}
+.svc-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: var(--white);
+  transition: width 0.4s ease;
+}
+.svc-card:hover { background: var(--bg2); }
+.svc-card:hover::after { width: 100%; }
+.svc-photo { height: clamp(150px,18vw,210px); background: var(--bg3); margin: 0 calc(-1 * clamp(2rem,4vw,3rem)); margin-bottom: -0.5rem; display: flex; align-items: center; justify-content: center; }
+.svc-n { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--muted); }
+.svc-name { font-family: var(--font-d); font-weight: 400; font-size: clamp(1.5rem,2.4vw,2rem); color: var(--white); line-height: 1.2; }
+.svc-desc { font-size: 15px; font-weight: 500; color: var(--muted); line-height: 1.75; flex: 1; }
+.svc-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+.svc-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border: 0.5px solid var(--line2); padding: 4px 10px; }
+
+/* ── PORTFOLIO ───────────────────────────────────── */
+.pf-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: clamp(2.5rem,5vw,4rem); }
+.pf-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); }
+.pf-item { background: var(--bg3); aspect-ratio: 4/3; position: relative; overflow: hidden; cursor: pointer; }
+.pf-item:first-child { grid-column: span 2; aspect-ratio: 16/9; }
+.pf-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; opacity: 0.12; }
+.pf-ph svg { width: 28px; height: 28px; }
+.pf-ph span { font-size: 9px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+.pf-ov { position: absolute; inset: 0; background: rgba(12,12,12,0.78); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.25rem; opacity: 0; transition: opacity 0.3s; }
+.pf-item:hover .pf-ov { opacity: 1; }
+.pf-title { font-family: var(--font-d); font-size: 1.1rem; font-weight: 400; color: var(--white); }
+.pf-meta { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+.pf-foot { margin-top: 2rem; display: flex; justify-content: center; }
+
+/* ── PROCESS ─────────────────────────────────────── */
+.proc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--line); margin-top: clamp(2.5rem,5vw,4rem); }
+.proc-step { background: var(--bg); padding: 2rem 1.75rem; display: flex; flex-direction: column; gap: 1rem; }
+.proc-n { font-family: var(--font-d); font-size: 2rem; font-weight: 300; color: var(--line2); line-height: 1; }
+.proc-name { font-size: 14px; font-weight: 600; color: var(--white); }
+.proc-desc { font-size: 14px; font-weight: 500; color: var(--muted); line-height: 1.7; }
+
+/* ── ABOUT ───────────────────────────────────────── */
+.ab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem,7vw,7rem); align-items: center; }
+.ab-photo { aspect-ratio: 4/5; background: var(--bg3); display: flex; align-items: center; justify-content: center; }
+.ab-txt { display: flex; flex-direction: column; gap: 1.5rem; }
+.ab-lead { font-family: var(--font-d); font-weight: 300; font-size: clamp(1.4rem,2.5vw,1.9rem); line-height: 1.4; color: var(--white); }
+.ab-body { font-size: 15px; font-weight: 500; color: var(--muted); line-height: 1.8; }
+.ab-lnk {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--white); display: inline-flex; align-items: center; gap: 8px;
+  border-bottom: 0.5px solid var(--line2); padding-bottom: 4px;
+  transition: border-color 0.2s, gap 0.2s; width: fit-content;
+}
+.ab-lnk:hover { border-color: var(--white); gap: 14px; }
+
+/* ── MARQUEE 2 — партнёры ────────────────────────── */
+.marq2 { background: var(--bg2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.marq2-hd { padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.marq2-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.marq2-body { overflow: hidden; padding: 1rem 0; }
+.pi { display: inline-flex; align-items: center; gap: 0; padding: 0 4px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.55); letter-spacing: 0.04em; }
+.ps { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.25); flex-shrink: 0; margin: 0 28px; }
+
+/* ── FORM ────────────────────────────────────────── */
+.form-sec { background: var(--bg2); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem,7vw,7rem); align-items: start; }
+.form-lead { font-family: var(--font-d); font-weight: 300; font-size: clamp(1.8rem,3.2vw,2.8rem); line-height: 1.15; color: var(--white); margin-bottom: 1.5rem; }
+.form-note { font-size: 15px; font-weight: 500; color: var(--muted); line-height: 1.8; }
+.contacts { margin-top: 1.75rem; display: flex; flex-direction: column; gap: 0.875rem; }
+.c-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
+.c-ico { flex-shrink: 0; width: 20px; color: var(--muted); margin-top: 2px; }
+.c-val { font-weight: 600; color: var(--white); }
+.c-val a { color: var(--white); }
+.c-val a:hover { opacity: 0.75; }
+.c-sub { font-size: 12px; font-weight: 500; color: var(--muted); margin-top: 2px; }
+.form { display: flex; flex-direction: column; gap: 1px; }
+.ff input, .ff textarea {
+  width: 100%; background: var(--bg3); border: none; border-bottom: 0.5px solid var(--line2);
+  color: var(--white); font-family: var(--font-b); font-size: 14px; font-weight: 500;
+  padding: 17px 0; outline: none; transition: border-color 0.2s;
+}
+.ff textarea { resize: none; height: 110px; padding-top: 17px; }
+.ff input::placeholder, .ff textarea::placeholder { color: rgba(255,255,255,0.38); font-size: 13px; }
+.ff input:focus, .ff textarea:focus { border-color: rgba(255,255,255,0.55); }
+.consent-row { display: flex; align-items: flex-start; gap: 12px; margin: 1.5rem 0 1rem; cursor: pointer; }
+.cb-box { width: 16px; height: 16px; border: 0.5px solid var(--line2); flex-shrink: 0; margin-top: 2px; position: relative; transition: all 0.15s; }
+.cb-box.on { background: var(--white); border-color: var(--white); }
+.cb-box.on::after { content: ''; position: absolute; left: 4px; top: 1px; width: 5px; height: 9px; border: 1.5px solid #000; border-top: none; border-left: none; transform: rotate(45deg); }
+.consent-txt { font-size: 12px; font-weight: 500; color: var(--muted); line-height: 1.6; }
+.consent-txt a { color: var(--white); border-bottom: 0.5px solid var(--line2); }
+.form-sbmt { display: flex; align-items: center; gap: 1.5rem; }
+.form-priv { font-size: 10px; font-weight: 500; color: var(--muted); line-height: 1.6; max-width: 220px; }
+#sbtn:disabled { opacity: 0.35; cursor: not-allowed; }
+.form-ok { display: none; padding: 1.5rem; border: 0.5px solid var(--line2); text-align: center; margin-top: 1rem; }
+.form-ok.show { display: block; }
+.form-ok strong { font-family: var(--font-d); font-size: 1.2rem; font-weight: 400; color: var(--white); display: block; margin-bottom: 0.4rem; }
+.form-ok p { font-size: 14px; font-weight: 500; color: var(--muted); }
+
+/* ── FOOTER ──────────────────────────────────────── */
+footer { background: var(--bg); border-top: 1px solid var(--line); padding: clamp(2.5rem,5vw,4rem) 0 2rem; }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.foot-desc { font-size: 13px; font-weight: 500; color: var(--muted); line-height: 1.7; margin-top: 1rem; max-width: 260px; }
+.foot-t { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; }
+.foot-links { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.foot-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.6); transition: color 0.2s; }
+.foot-links a:hover { color: var(--white); }
+.foot-bot { border-top: 1px solid var(--line); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.foot-copy { font-size: 12px; font-weight: 500; color: var(--muted); }
+.foot-gk { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.foot-gk a { transition: color 0.2s; }
+.foot-gk a:hover { color: var(--white); }
+
+/* ── STICKY ──────────────────────────────────────── */
+.sticky { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99; opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
+.sticky.on { opacity: 1; transform: none; pointer-events: all; }
+
+/* ── ANIMATIONS ──────────────────────────────────── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.fu { opacity: 1; }
+.fu.anim { animation: fadeUp 0.7s ease both; }
+.fu.d1 { animation-delay: 0.1s; }
+.fu.d2 { animation-delay: 0.2s; }
+.fu.d3 { animation-delay: 0.3s; }
+.fu.d4 { animation-delay: 0.4s; }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 900px) {
+  nav { display: none; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .pf-grid { grid-template-columns: 1fr 1fr; }
+  .pf-item:first-child { grid-column: span 2; }
+  .proc-grid { grid-template-columns: 1fr 1fr; }
+  .ab-grid, .form-grid, .pf-intro { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat { border-right: none; border-bottom: 1px solid var(--line); }
+  .stat:last-child { border-bottom: none; }
+}
+@media (max-width: 560px) {
+  .pf-grid { grid-template-columns: 1fr; }
+  .pf-item:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+  .proc-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+}
+.addr-lnk { color: inherit; border-bottom: 0.5px solid var(--line2); transition: opacity 0.2s; }
+.addr-lnk:hover { opacity: 0.7; }
+
+
+
+/* ── DOWNLOAD FORMS ──────────────────────────────── */
+.forms-sec { background: var(--bg); border-top: 1px solid var(--line); }
+.forms-head { margin-bottom: 2rem; }
+.forms-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--line); }
+.form-dl {
+  background: var(--bg2); padding: 1.75rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; transition: background 0.2s; text-decoration: none;
+}
+.form-dl:hover { background: var(--bg3); }
+.form-dl-info { display: flex; flex-direction: column; gap: 4px; }
+.form-dl-name { font-size: 14px; font-weight: 600; color: var(--white); line-height: 1.4; }
+.form-dl-sub { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.form-dl-icon { flex-shrink: 0; width: 40px; height: 40px; border: 0.5px solid var(--line2); display: flex; align-items: center; justify-content: center; color: var(--muted); transition: color 0.2s, border-color 0.2s; }
+.form-dl:hover .form-dl-icon { color: var(--white); border-color: var(--white); }
+@media(max-width:640px){ .forms-grid { grid-template-columns: 1fr; } }
+
+
+/* ── BURGER MENU ─────────────────────────────────── */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: none;
+  z-index: 201;
+}
+.burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mob-menu {
+  display: none;
+  position: fixed;
+  top: 66px;
+  left: 0; right: 0;
+  background: rgba(12,12,12,0.98);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  z-index: 199;
+  flex-direction: column;
+  padding: 1.5rem clamp(1.25rem,5vw,3rem);
+  gap: 0;
+  animation: slideDown 0.25s ease;
+}
+.mob-menu.open { display: flex; }
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+.mob-menu a {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 1rem 0;
+  border-bottom: 0.5px solid var(--line);
+  transition: color 0.2s;
+  display: block;
+}
+.mob-menu a:last-child { border-bottom: none; }
+.mob-menu a:hover, .mob-menu a.act { color: var(--white); }
+.mob-menu-phone {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  padding: 1rem 0;
+  border-bottom: 0.5px solid var(--line);
+  display: block;
+}
+.mob-menu-btn {
+  margin-top: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .burger { display: flex; }
+  nav { display: none !important; }
+  .hdr-r .btn { display: none; }
+  .hdr-r .phone { display: none; }
+}
+
+
+.page-wrap { max-width:860px; margin:0 auto; padding:120px clamp(1.25rem,5vw,3rem) 80px; }
+.doc-title { font-family:var(--font-d); font-weight:300; font-style:italic; font-size:clamp(2.2rem,5vw,4rem); line-height:1.05; color:var(--white); margin-bottom:.75rem; }
+.doc-date { font-size:12px; font-weight:500; color:var(--muted); margin-bottom:3.5rem; padding-bottom:2rem; border-bottom:1px solid var(--line); }
+.doc-sec { margin-bottom:2.75rem; }
+.doc-sec h2 { font-family:var(--font-d); font-weight:400; font-size:1.3rem; color:var(--white); margin-bottom:1rem; }
+.doc-sec p { font-size:15px; font-weight:500; color:var(--muted); line-height:1.85; margin-bottom:.75rem; }
+.doc-sec ul { list-style:none; margin:.5rem 0 .75rem; padding:0; }
+.doc-sec ul li { font-size:15px; font-weight:500; color:var(--muted); line-height:1.8; padding-left:1.25rem; position:relative; margin-bottom:.2rem; }
+.doc-sec ul li::before { content:'—'; position:absolute; left:0; color:rgba(255,255,255,0.2); }
+.doc-sec a { color:var(--white); border-bottom:.5px solid var(--line2); }
+.doc-foot { border-top:1px solid var(--line); padding-top:2rem; margin-top:3rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+.doc-foot span { font-size:11px; font-weight:500; color:var(--muted); }
+.back-lnk { font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); transition:color .2s; }
+.back-lnk:hover { color:var(--white); }
+@media(max-width:900px){ nav{display:none} }
+
+/* ── SCROLL REVEAL ─────────────────────────────────── */
+.sr { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.sr.visible { opacity: 1; transform: none; }
+.sr-d1 { transition-delay: 0.1s; }
+.sr-d2 { transition-delay: 0.2s; }
+.sr-d3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<div class="sticky" id="stk">
+  <button class="btn btn-w" onclick="location.href='index.html#form'">Оставить заявку</button>
+</div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="wrap">
+    <div class="hdr">
+      <a href="index.html" class="logo">
+        <div class="logo-word">Радиус</div>
+        <div class="logo-rule"></div>
+        <div class="logo-sub">Производственная компания</div>
+      </a>
+      <nav>
+        <a href="index.html#services">Услуги</a>
+        <a href="about.html">О компании</a>
+        <a href="spravochnik.html">Справочник</a>
+        <a href="portfolio.html">Портфолио</a>
+        <a href="index.html#form">Контакты</a>
+      </nav>
+      <div class="hdr-r">
+        <a href="tel:+79853105757" class="phone">+7 (985) 310-57-57</a>
+        <button class="btn btn-w" onclick="location.href='index.html#form'">Заявка</button>
+              <button class="burger" id="burger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="mob-menu" id="mobMenu">
+  <a href="tel:+79853105757" class="mob-menu-phone">+7 (985) 310-57-57</a>
+  <a href="index.html#services">Услуги</a>
+  <a href="about.html">О компании</a>
+  <a href="spravochnik.html">Справочник</a>
+  <a href="portfolio.html">Портфолио</a>
+  <a href="index.html#form">Контакты</a>
+  <button class="btn btn-w mob-menu-btn" onclick="location.href='index.html#form'">Оставить заявку</button>
+</div>
+
+<div class="page-wrap">
+  <h1 class="doc-title sr">Политика конфиденциальности и обработки персональных данных</h1>
+  <p class="doc-date">Редакция от 17 августа 2026 года</p>
+
+  <div class="doc-sec"><h2>1. Общие положения</h2>
+  <p>Настоящая Политика конфиденциальности и обработки персональных данных (далее — Политика) действует в отношении сайта <strong style="color:var(--white)">pk-radius.ru</strong>, включая его страницы и файлы (далее — Сайт). Политика объясняет, какие сведения могут обрабатываться при посещении Сайта и обращении в компанию, для чего они нужны, кому могут быть доступны и как посетитель может реализовать свои права.</p>
+  <p>Оператор персональных данных: Общество с ограниченной ответственностью «ПАКОН» (ООО «ПАКОН»), ИНН 7722531370, ОГРН 1047796896025, КПП 502701001. Адрес: 140030, Московская область, г. Люберцы, пгт Малаховка, Касимовское шоссе, д. 3Г. «ПК Радиус» является обозначением направления деятельности Оператора.</p>
+  <p>Политика разработана с учётом Конституции Российской Федерации, Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и иных применимых нормативных актов. Политика размещена в открытом доступе. Если для конкретной обработки законом требуется согласие, оно запрашивается отдельно и не считается предоставленным только из-за просмотра Сайта.</p></div>
+
+  <div class="doc-sec"><h2>2. Принципы обработки</h2>
+  <p>Оператор обрабатывает только те данные, которые необходимы для заранее определённых и законных целей, не объединяет несовместимые цели, поддерживает данные в актуальном состоянии и не хранит их дольше необходимого. Обработка выполняется законно, справедливо и с соблюдением конфиденциальности.</p></div>
+
+  <div class="doc-sec"><h2>3. Категории посетителей и данных</h2>
+  <p>Субъектами данных могут быть посетители Сайта, представители потенциальных и действующих заказчиков, контрагентов и партнёров.</p>
+  <ul><li>контактные данные, которые человек сообщает добровольно: имя, должность, организация, телефон и электронная почта;</li><li>сведения из обращения: параметры заказа, чертежи, файлы и содержание переписки;</li><li>технические сведения, возникающие при обычной работе веб-сервера: IP-адрес, дата и время запроса, адрес запрошенной страницы, адрес страницы-источника, тип браузера, операционной системы и устройства;</li><li>решение о загрузке сторонней карты — оно хранится только в локальном хранилище браузера посетителя.</li></ul>
+  <p>Оператор не запрашивает через Сайт сведения о расовой или национальной принадлежности, политических взглядах, религиозных убеждениях, здоровье, интимной жизни, а также биометрические данные. Не следует направлять такие сведения без отдельной законной необходимости.</p></div>
+
+  <div class="doc-sec"><h2>4. Цели обработки</h2>
+  <ul><li>ответ на обращение, консультация и уточнение технического задания;</li><li>расчёт стоимости, подготовка предложения, заключение и исполнение договора;</li><li>организация производства, доставки и взаимодействия с исполнителями;</li><li>обеспечение доступности и безопасности Сайта, обнаружение ошибок и неправомерных действий;</li><li>исполнение обязанностей, установленных законодательством Российской Федерации, защита прав и законных интересов Оператора и других лиц.</li></ul></div>
+
+  <div class="doc-sec"><h2>5. Правовые основания и действия с данными</h2>
+  <p>Основаниями могут быть согласие субъекта; действия по инициативе субъекта до заключения договора; заключение и исполнение договора; исполнение установленной законом обязанности; осуществление прав и законных интересов Оператора при условии, что права субъекта не нарушаются.</p>
+  <p>Оператор может осуществлять сбор, запись, систематизацию, накопление, хранение, уточнение, извлечение, использование, передачу в предусмотренных законом и договором случаях, обезличивание, блокирование, удаление и уничтожение данных автоматизированным, неавтоматизированным или смешанным способом.</p></div>
+
+  <div class="doc-sec"><h2>6. Обращения по телефону и электронной почте</h2>
+  <p>На Сайте нет веб-формы, автоматически отправляющей данные Оператору. Файлы Excel скачиваются на устройство посетителя. Звонок и письмо совершаются только по инициативе посетителя через выбранное им приложение. Отправляя письмо или сообщая сведения по телефону, посетитель самостоятельно определяет их объём и подтверждает необходимость обработки для ответа и дальнейшего взаимодействия.</p>
+  <p>При отправке письма на адрес в домене yandex.ru сведения проходят через выбранные отправителем почтовые сервисы и сервис электронной почты получателя. Условия обработки на стороне Яндекса определяются его <a href="https://yandex.ru/legal/confidential/" target="_blank" rel="noopener noreferrer">Политикой конфиденциальности</a>.</p></div>
+
+  <div class="doc-sec" id="cookies"><h2>7. Cookie, локальное хранилище и выбор посетителя</h2>
+  <p>Код Сайта не устанавливает собственные cookie, не использует системы веб-аналитики, рекламные пиксели, системы профилирования и скрытые трекеры.</p>
+  <p>Чтобы не спрашивать о настройках при каждом переходе между страницами, Сайт сохраняет в локальном хранилище браузера запись <strong style="color:var(--white)">pkradius_privacy_choice_v2</strong> со значением «принято» или «отклонено». Эта запись остаётся на устройстве посетителя, не содержит имени, телефона, электронной почты и автоматически не передаётся Оператору или на сервер. Она хранится до удаления данных сайта в браузере либо до изменения версии механизма согласия.</p>
+  <p>Посетитель может изменить решение в любое время кнопкой «Настройки cookie» внизу любой страницы. При отказе внешняя карта не загружается. Удалить локальную запись можно также через настройки браузера. Сам веб-сервер при выдаче страниц неизбежно получает технический запрос и может записать его в журнал безопасности; это не является рекламным отслеживанием.</p></div>
+
+  <div class="doc-sec"><h2>8. Карта Яндекса и сторонние cookie</h2>
+  <p>Карта ООО «ЯНДЕКС» заблокирована по умолчанию. До нажатия «Принять» или «Разрешить и показать» браузер не загружает iframe карты и не обращается к серверу Яндекса по инициативе Сайта.</p>
+  <p>После явного согласия браузер устанавливает соединение с Яндексом. Яндекс может получить IP-адрес, дату и время запроса, сведения о браузере и устройстве, а также установить собственные cookie. Состав, цели и сроки такой обработки определяет Яндекс по своим <a href="https://yandex.ru/legal/confidential/" target="_blank" rel="noopener noreferrer">правилам конфиденциальности</a> и <a href="https://yandex.ru/legal/cookies_policy/ru/" target="_blank" rel="noopener noreferrer">политике cookie</a>.</p>
+  <p>Отказ не ограничивает доступ к остальному Сайту. Адрес и ссылка на внешний сайт карт остаются доступными. Если карта уже загружалась, последующий отказ останавливает её дальнейшую загрузку на Сайте, однако удалить ранее установленные сторонние cookie может только сам посетитель через настройки браузера.</p></div>
+
+  <div class="doc-sec"><h2>9. Получатели и поручение обработки</h2>
+  <p>В необходимом объёме данные могут быть доступны поставщикам хостинга и электронной почты, лицам, обеспечивающим информационную безопасность и техническую поддержку, перевозчикам и исполнителям по заказу. Такие лица получают только сведения, необходимые для соответствующей задачи, и обязаны обеспечивать их конфиденциальность и безопасность. Государственным органам данные предоставляются лишь при наличии законного основания. Оператор не продаёт данные и не передаёт их для чужой рекламы.</p></div>
+
+  <div class="doc-sec"><h2>10. Локализация, сроки хранения и уничтожение</h2>
+  <p>При сборе персональных данных граждан Российской Федерации Оператор обеспечивает запись, систематизацию, накопление, хранение, уточнение и извлечение с использованием баз данных на территории Российской Федерации, кроме случаев, прямо предусмотренных законом. До подключения нового хостинга, почтового или иного сервиса проверяются условия размещения и обработки данных.</p>
+  <p>Данные хранятся до достижения цели обработки, завершения договорных отношений и истечения обязательных сроков хранения документов либо до отзыва согласия, если отсутствует другое законное основание. Технические журналы хранятся в пределах срока, необходимого для безопасности и устранения ошибок, с учётом настроек и договора с хостинг-провайдером. После прекращения оснований данные удаляются, уничтожаются или обезличиваются в порядке и сроки, предусмотренные законом.</p></div>
+
+  <div class="doc-sec"><h2>11. Защита данных</h2>
+  <p>Оператор применяет необходимые правовые, организационные и технические меры: ограничение доступа, назначение ответственных лиц, учёт и пересмотр прав доступа, использование защищённого соединения, резервирование, контроль событий безопасности, антивирусную защиту, обучение работников и внутренний контроль. Конкретный набор мер определяется с учётом характера обработки и актуальных угроз.</p></div>
+
+  <div class="doc-sec"><h2>12. Права субъекта и отзыв согласия</h2>
+  <ul><li>получить сведения об обработке своих данных;</li><li>потребовать уточнения, блокирования, прекращения обработки или удаления данных при наличии оснований;</li><li>отозвать согласие, не затрагивая законность обработки до отзыва;</li><li>обжаловать действия Оператора в Роскомнадзор или в суд.</li></ul>
+  <p>Запрос можно направить на <a href="mailto:pkradius@yandex.ru">pkradius@yandex.ru</a> либо по почтовому адресу Оператора. В запросе следует указать сведения, позволяющие подтвердить личность заявителя и его отношение к данным, описать требование и поставить подпись, если запрос направляется на бумаге. Оператор отвечает в сроки, установленные законодательством.</p></div>
+
+  <div class="doc-sec"><h2>13. Информация для детей</h2>
+  <p>Сайт посвящён производственным услугам, не содержит информации, причиняющей вред здоровью или развитию детей, и классифицирован владельцем как информационная продукция для детей любого возраста — <strong style="color:var(--white)">0+</strong>. Сайт не предназначен для целенаправленного сбора данных несовершеннолетних. Для заключения договора несовершеннолетнему следует действовать через законного представителя.</p></div>
+
+  <div class="doc-sec"><h2>14. Изменение Политики</h2>
+  <p>Оператор вправе обновлять Политику при изменении законодательства, состава сервисов или порядка обработки. Новая редакция действует с даты, указанной в начале документа, и публикуется на этой странице. Существенное изменение целей обработки не заменяет получение нового согласия, если оно требуется законом.</p></div>
+
+  <div class="doc-sec"><h2>15. Контакты Оператора</h2>
+  <ul><li>Оператор: ООО «ПАКОН»</li><li>Телефон: <a href="tel:+79853105757">8 (985) 310-57-57</a></li><li>Email: <a href="mailto:pkradius@yandex.ru">pkradius@yandex.ru</a></li><li>Адрес: 140030, Московская область, г. Люберцы, пгт Малаховка, Касимовское шоссе, д. 3Г.</li></ul></div>
+
+  <div class="doc-foot">
+    <span>© 2026 ООО «ПАКОН». ПК Радиус.</span>
+    <a href="index.html" class="back-lnk">← Вернуться на сайт</a>
+  </div>
+</div>
+
+
+<!-- MAP -->
+<section style="background:var(--bg2);border-top:1px solid var(--line);padding:clamp(3rem,6vw,5rem) 0">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.75rem">
+      <div>
+        <p class="tag">Как нас найти</p>
+        <h2 class="sec-t" style="font-size:clamp(1.8rem,3vw,2.8rem)">Мы находимся<br>в Подмосковье</h2>
+      </div>
+      <div style="text-align:right">
+        <p style="font-size:15px;font-weight:600;color:var(--white)">Касимовское ш., 3Г, корп. 1</p>
+        <p style="font-size:13px;font-weight:500;color:var(--muted);margin-top:4px">р.п. Малаховка, Москва</p>
+        <p style="font-size:13px;font-weight:500;color:var(--muted);margin-top:2px">Пн–Пт: 9:00–18:00</p>
+        <a href="https://yandex.ru/maps/-/CPVeFK1d" target="_blank"
+           style="display:inline-block;margin-top:10px;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);border-bottom:0.5px solid rgba(255,255,255,0.3);padding-bottom:3px">
+          Открыть в Яндекс Картах →
+        </a>
+      </div>
+    </div>
+    <div class="map-consent-shell" style="border:0.5px solid rgba(255,255,255,0.18);overflow:hidden;border-radius:2px">
+      <iframe data-consent-src="https://yandex.ru/map-widget/v1/?ll=38.023295%2C55.663689&z=16&pt=38.023295%2C55.663689%2Cpm2rdm"
+              title="Карта проезда к ПК Радиус" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+              width="100%" height="360" frameborder="0" allowfullscreen="true"
+              style="display:block;filter:brightness(0.85) contrast(1.1) grayscale(0.3)">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="margin-bottom:1.25rem">
+          <div class="logo-word">Радиус</div>
+          <div class="logo-rule"></div>
+          <div class="logo-sub">Производственная компания</div>
+        </div>
+        <p class="foot-desc">Гибка алюминиевых и стальных профилей любой сложности.</p>
+      </div>
+      <div>
+        <div class="foot-t">Услуги</div>
+        <ul class="foot-links">
+          <li><a href="index.html#services">Гибка профилей</a></li>
+          <li><a href="index.html#services">Гибка листового металла</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-t">Компания</div>
+        <ul class="foot-links">
+          <li><a href="about.html">О нас</a></li>
+          <li><a href="portfolio.html">Портфолио</a></li>
+          <li><a href="spravochnik.html">Справочник</a></li>
+          <li><a href="policy.html">Политика конфиденциальности</a></li>
+          <li><a href="cookies.html">Уведомление о cookie</a></li>
+          <li><a href="terms.html">Пользовательское соглашение</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-t">Контакты</div>
+        <ul class="foot-links">
+          <li><a href="tel:+79853105757">8 (985) 310-57-57</a></li>
+          <li><a href="tel:+74955013211">8-495-501-32-11</a></li>
+          <li><a href="tel:+74955013236">8-495-501-32-36 (доб. 113)</a></li>
+          <li><a href="mailto:pkradius@yandex.ru">pkradius@yandex.ru</a></li>
+          <li style="color:rgba(255,255,255,.45);font-size:12px;line-height:1.5"><a href="https://yandex.ru/maps/-/CPVeFK1d" target="_blank" class="addr-lnk">Касимовское ш., 3Г, корп. 1</a><br>р.п. Малаховка, Москва</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span class="foot-copy">© 2026 ООО «ПАКОН». ПК Радиус.</span>
+      <span class="age-mark" aria-label="Информационная продукция для детей любого возраста">0+</span>
+      <button class="privacy-settings" type="button" data-privacy-settings>Настройки cookie</button>
+      <span class="foot-gk">Входит в <a href="https://pakon.ru" target="_blank">группу компаний ПАКОН</a></span>
+    </div>
+  </div>
+</footer>
+<script>
+window.addEventListener('scroll', function(){
+  var hdr=document.getElementById('hdr');
+  var stk=document.getElementById('stk');
+  if(hdr) hdr.classList.toggle('sc', window.scrollY>20);
+  if(stk) stk.classList.toggle('on', window.scrollY>400);
+});
+var burger=document.getElementById('burger');
+var mobMenu=document.getElementById('mobMenu');
+if(burger && mobMenu){
+  burger.addEventListener('click', function(){
+    burger.classList.toggle('open');
+    mobMenu.classList.toggle('open');
+    document.body.style.overflow=burger.classList.contains('open')?'hidden':'';
+  });
+  mobMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      burger.classList.remove('open');
+      mobMenu.classList.remove('open');
+      document.body.style.overflow='';
+    });
+  });
+}
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('anim');obs.unobserve(e.target);} });
+},{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.fu').forEach(function(el){obs.observe(el);});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
+var sro = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if(e.isIntersecting) { e.target.classList.add('visible'); sro.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.sr').forEach(function(el) { sro.observe(el); });
+</script>
+</body>
+</html>
